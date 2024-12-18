@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcx.dao.RubbishMapper" >
+    <resultMap id="BaseResultMap" type="com.hcx.bean.Rubbish" >
+        <id column="rubbish_id" property="rubbishId" jdbcType="INTEGER" />
+        <result column="rubbish_userid" property="rubbishUserid" jdbcType="INTEGER" />
+        <result column="rubbish_nodeid" property="rubbishNodeid" jdbcType="INTEGER" />
+        <result column="rubbish_createtime" property="rubbishCreatetime" jdbcType="VARCHAR" />
+        <result column="rubbish_updatetime" property="rubbishUpdatetime" jdbcType="VARCHAR" />
+        <result column="rubbish_humidity" property="rubbishHumidity" jdbcType="VARCHAR" />
+        <result column="rubbish_capacity" property="rubbishCapacity" jdbcType="VARCHAR" />
+        <result column="rubbish_temperature" property="rubbishTemperature" jdbcType="VARCHAR" />
+        <result column="rubbish_alcohol" property="rubbishAlcohol" jdbcType="VARCHAR" />
+    </resultMap>
+    <parameterMap id="BaseParameterMap" type="com.hcx.bean.Rubbish">
+        <parameter property="rubbishId" jdbcType="INTEGER" />
+        <parameter property="rubbishUserid" jdbcType="INTEGER" />
+        <parameter property="rubbishNodeid" jdbcType="INTEGER" />
+        <parameter property="rubbishCreatetime" jdbcType="VARCHAR" />
+        <parameter property="rubbishUpdatetime" jdbcType="VARCHAR" />
+        <parameter property="rubbishHumidity" jdbcType="VARCHAR" />
+        <parameter property="rubbishCapacity" jdbcType="VARCHAR" />
+        <parameter property="rubbishTemperature" jdbcType="VARCHAR" />
+        <parameter property="rubbishAlcohol" jdbcType="VARCHAR" />
+    </parameterMap>
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select * from rubbish
+    </select>
+
+    <select id="countById" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from rubbish where rubbish_userid = #{id}
+    </select>
+
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from rubbish where rubbish_userid = #{id}
+    </select>
+
+    <select id="selectByNodeId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select * from rubbish where rubbish_nodeid = #{id}
+    </select>
+
+    <delete id="delByRubbishId" parameterType="java.lang.Integer">
+        delete from rubbish where rubbish_id = #{rubbishId,jdbcType=INTEGER}
+    </delete>
+
+    <update id="adminChangeNode" parameterType="java.util.Map">
+        update rubbish
+        set rubbish_nodeid = #{newNode, jdbcType=INTEGER},
+            rubbish_updatetime = #{updateDatetime, jdbcType=TIMESTAMP}
+        where rubbish_id = #{rubbishId, jdbcType=INTEGER}
+    </update>
+
+    <update id="updateRubbish" parameterMap="BaseParameterMap">
+        update rubbish
+        set rubbish_capacity = #{rubbishCapacity},
+            rubbish_humidity = #{rubbishHumidity},
+            rubbish_temperature = #{rubbishTemperature},
+            rubbish_alcohol = #{rubbishAlcohol},
+            rubbish_updatetime = #{rubbishUpdatetime, jdbcType=TIMESTAMP}
+        where rubbish_id = #{rubbishId, jdbcType=INTEGER}
+    </update>
+
+    <insert id="addRubbish" parameterMap="BaseParameterMap">
+        INSERT INTO rubbish (rubbish_userid, rubbish_nodeid, rubbish_createtime, rubbish_updatetime, rubbish_capacity, rubbish_humidity, rubbish_temperature, rubbish_alcohol)
+        values (#{rubbishUserid}, #{rubbishNodeid}, #{rubbishCreatetime}, #{rubbishUpdatetime}, #{rubbishCapacity}, #{rubbishHumidity}, #{rubbishTemperature}, #{rubbishAlcohol});
+    </insert>
+
+</mapper>

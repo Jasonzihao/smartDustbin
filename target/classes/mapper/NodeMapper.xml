@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hcx.dao.NodeMapper">
+
+    <resultMap id="BaseResultMap" type="com.hcx.bean.Node">
+            <id property="id" column="node_id" jdbcType="INTEGER"/>
+            <result property="jingdu" column="node_jingdu" jdbcType="VARCHAR"/>
+            <result property="weidu" column="node_weidu" jdbcType="VARCHAR"/>
+            <result property="status" column="node_status" jdbcType="VARCHAR"/>
+            <result property="createtime" column="node_createtime" jdbcType="VARCHAR"/>
+            <result property="updatetime" column="node_updatetime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="insertNode">
+        INSERT INTO node (node_jingdu, node_weidu, node_status, node_createtime, node_updatetime)
+        values (#{jingdu}, #{weidu}, #{status}, #{createtime}, #{updatetime});
+    </insert>
+    <update id="updateNodeById">
+        Update node
+        SET node_status = #{status},
+            node_jingdu = #{jingdu},
+            node_weidu = #{weidu},
+            node_updatetime = #{updatetime}
+        WHERE node_id = #{id}
+    </update>
+    <delete id="delNodeById" parameterType="java.lang.Integer">
+         DELETE FROM node WHERE node_id = #{id}
+    </delete>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from node;
+    </select>
+</mapper>

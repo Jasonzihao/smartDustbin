@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration debug="true">
+
+
+    <!--    <appender name="CORE" class="org.apache.log4j.FileAppender">-->
+    <!--        <param name="File" value="${org.apache.cocoon.work.directory}/cocoon-logs/log4j.log"/>-->
+    <!--        <param name="Append" value="true"/>-->
+    <!--        <layout class="org.apache.log4j.PatternLayout">-->
+    <!--            <param name="ConversionPattern" value="%d %-5p %t %c - %m%n"/>-->
+    <!--        </layout>-->
+    <!--    </appender>-->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %t %c - %m%n"/>
+        </layout>
+    </appender>
+    <root>
+        <priority value="DEBUG"/> <!-- 设置日志级别为 DEBUG -->
+        <appender-ref ref="CONSOLE"/>
+    </root>
+    <!--    <root>-->
+    <!--        <priority value="${org.apache.cocoon.log4j.loglevel}"/>-->
+    <!--        <appender-ref ref="CORE"/>-->
+    <!--    </root>-->
+</log4j:configuration>
